@@ -1,0 +1,124 @@
+# IDENTIFYING COMPUTATIONAL COMPLEXITY 
+
+# 1) What is the computational complexity of fact0? Explain your answer.
+
+def fact0(i):
+ assert type(i) == int and i >= 0
+ if i == 0 or i == 1:
+ return 1
+ return i * fact0(i-1)
+
+ T(i-k) = 3K + t(i-k)
+ base case is reached when i-k = 1 or 0
+ substituting gives 3(i-1) + t(1) 
+ Big O is linear
+
+
+# 2) What is the computational complexity of fact1? Explain your answer.
+def fact1(i):
+ assert type(i) == int and i >= 0
+ res = 1
+ while i > 1:
+ res = res * i
+ i -= 1
+ return res
+
+ no.of steps involved = 4 + 3(i) {2 asserts + defining res + returning value + 3 steps in the while loop. The no.of times the while loops works will depend upon the length of i}
+Thus, the complexity is linear.
+
+# 3) What is the computational complexity of makeSet? Explain your answer.
+def makeSet(s):
+ assert type(s) == str
+ res = ''
+ for c in s:
+ if not c in res:
+ res = res + c
+ return res
+
+Each step involved above takes a unit time. The computational complexity is linear and depends on the
+length of the string, s. 
+
+
+# 4) What is the computational complexity of intersect? Explain your answer.
+def intersect(s1, s2):
+ assert type(s1) == str and type(s2) == str
+ s1 = makeSet(s1)
+ s2 = makeSet(s2)
+ res = ''
+ for e in s1:
+ if e in s2:
+ res = res + e
+ return res 
+
+As stated, the complexity of makeSet is linear. Thus, as this piece of code depends
+upon makeSet and upon the length of s1 to parse through all the letters, its complexity 
+is linear too. 
+
+5) Present a hand simulation of the code below. Describe the value to which each
+identifier is bound after each step of the computation. Note that “s1” and “s2” exist
+in more than one scope.
+def swap0(s1, s2):
+ assert type(s1) == list and type(s2) == list
+ tmp = s1[:]
+ s1 = s2[:]
+ s2 = tmp
+ return
+s1 = [1]
+s2 = [2]
+swap0(s1, s2)
+print s1, s2
+
+values before swap:
+s1, s2 = [1], [2]
+
+'tmp' temporarily copies the s1 value and is independent of any future modifications to s1
+s1 value is swapped by s2 value and is independent of any future modifications to s2
+s2 equals the temporarily stored value of s1 and is affected by future modifications to tmp
+
+values after swap:
+s1, s2 = [2], [1]
+
+
+
+6) Present a hand simulation of the following code:
+def swap1(s1, s2):
+ assert type(s1) == list and type(s2) == list
+ return s2, s1
+s1 = [1]
+s2 = [2]
+s1, s2 = swap1(s1, s2)
+print s1, s2
+
+values before swap function:
+s1, s2 = [1], [2]
+
+values after the swap function:
+s1, s2 = [2], [1]
+
+
+This is because the function first returns value of s2 then s1
+
+
+7) Present a hand simulation of the following code:
+def rev(s):
+ assert type(s) == list
+ for i in range(len(s)/2):
+ tmp = s[i]
+ s[i] = s[-(i+1)]
+ s[-(i+1)] = tmp
+s = [1,2,3]
+rev(s)
+print s
+
+before reversing the list:
+s = [1,2,3]
+
+i = 0
+tmp = 1
+s[0] = s[-1] = 3
+s[-(i+1)] = s[-1] = 1
+
+after reversing the list:
+s = [3,2,1]
+
+
