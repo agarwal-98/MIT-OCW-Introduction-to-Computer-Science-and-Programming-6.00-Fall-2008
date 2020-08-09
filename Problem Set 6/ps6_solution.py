@@ -530,7 +530,27 @@ if __name__ == '__main__':
 	rearranged_dict = get_word_rearrangements(word_list)
 	play_game(word_list)
 
+
 # Problem 5: Algorithm Analysis
 
 # Characterize the time complexity of your implementation (in terms of the size of word_list and
 # the number of letters in a hand) of both pick_best_word and pick_best_word_faster.
+
+
+# For pick best word, the algorithm's design is such that it iterates over every word in the word list,
+# checks whether it is valid and compares the word's value to the previously recorded best value so far. As such, 
+# the complexity would be O(n) i.e, linear. The bigger the size of the word_list, the more the iterations needed to be
+# performed to check for validity and value comparison. The numer of letters in the hand have a largely insignificant
+# impact on the complexity of this function and is mainly dependent on the size of the word list.
+
+# For pick best word faster on the other hand, the get_word_rearragement dictionary prepares a dictionary consisting
+# of unique sorted string of letters as the key. The value(s) of every key in this dictionary are valid english words which can
+# be formed by this sorted string of letters. Thus, this dictionary is potentially shorter than the original word_list where all
+# valid words are recorded irrespective of similarities in the letters used to create different words. Thus, in terms of the 
+# size of the word_list, this function is potentially logarithmic. As the word_list grows, the time taken grows in a logarithmic fashion.
+# On the other hand, as this function also creates subsets of combinations using the letters in my hand, the bigger the size of my hand,
+# the more combinations are iterated over to find the best word. This has an impact on the time taken to run my function.
+
+# Thus, there seems to be trade-off between these two functions. For smaller hands, the pick_best_word_faster function is
+# definitely more computational powerful than the pick_best_word function. For larger hands, however, the latter might
+# be a better choice as it is less impacted by the size of the hand than the former. 
